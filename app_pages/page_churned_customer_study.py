@@ -15,17 +15,15 @@ def page_churned_customer_study_body():
     df = load_telco_data()
 
     # hard copied from churned customer study notebook
-    vars_to_study = ['Contract', 'InternetService',
-                     'OnlineSecurity', 'TechSupport', 'tenure']
+    vars_to_study = ['GarageArea', 'GrLivArea', 'OverallQual', 'TotalBsmtSF', 'YearBuilt']
 
-    st.write("### Churned Customer Study")
+    st.write("### Sales Records Study")
     st.info(
-        f"* The client is interested in understanding the patterns from the customer base "
-        f"so that the client can learn the most relevant variables correlated "
-        f"to a churned customer.")
+        f"* The client is interested in understanding the patterns with which features increase the value of a property in the market. "
+    )
 
     # inspect data
-    if st.checkbox("Inspect Customer Base"):
+    if st.checkbox("Inspect Sales Records"):
         st.write(
             f"* The dataset has {df.shape[0]} rows and {df.shape[1]} columns, "
             f"find below the first 10 rows.")
@@ -37,7 +35,7 @@ def page_churned_customer_study_body():
     # Correlation Study Summary
     st.write(
         f"* A correlation study was conducted in the notebook to better understand how "
-        f"the variables are correlated to Churn levels. \n"
+        f"the variables are correlated higher property value. \n"
         f"The most correlated variable are: **{vars_to_study}**"
     )
 
@@ -45,19 +43,15 @@ def page_churned_customer_study_body():
     st.info(
         f"The correlation indications and plots below interpretation converge. "
         f"It is indicated that: \n"
-        f"* A churned customer typically has a month-to-month contract \n"
-        f"* A churned customer typically has fibre optic. \n"
-        f"* A churned customer typically doesn't have tech support. \n"
-        f"* A churned customer doesn't have online security. \n"
-        f"* A churned customer typically has low tenure levels. \n"
+        f"* A bigger GarageArea typically increases property value.\n"
+        f"* More GrLivArea typically increases property value. \n"
+        f"* A higher grading of OverallQual typically increases property value. \n"
+        f"* More TotalBsmtSF typically increases property value. \n"
+        f"* The more recent the YearBuilt is tends to incease property value. \n"
     )
 
     # Code copied from "02 - Churned Customer Study" notebook - "EDA on selected variables" section
-    df_eda = df.filter(vars_to_study + ['Churn'])
-
-    # Individual plots per variable
-    if st.checkbox("Churn Levels per Variable"):
-        churn_level_per_variable(df_eda)
+    df_eda = df.filter(vars_to_study + ['SalePrice'])
 
     # Parallel plot
     if st.checkbox("Parallel Plot"):

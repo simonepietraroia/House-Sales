@@ -7,35 +7,29 @@ def page_summary_body():
     # text based on README file - "Dataset Content" section
     st.info(
         f"**Project Terms & Jargon**\n"
-        f"* A **customer** is a person who consumes your service or product.\n"
-        f"* A **prospect** is a potential customer.\n"
-        f"* A **churned** customer is a user who has stopped using your product or service.\n "
-        f"* This customer has a **tenure** level, the number of months this person " 
-        f"has used our product/service.\n\n"
+        f"* **1stFlrSF** is First Floor Square Feet.\n"
+        f"* **2ndFlrSF** is Second Floor Square Feet.\n"
+        f"* **BedroomAbvGr** is Bedroom Above Grade and is given a score from 0-8.\n "
+        f"* **BsmtExposure** refers to walkout or garden level walls ( Gd: Good Exposure; Av: Average Exposure; Mn: Mimimum Exposure; No: No Exposure; None: No Basement)\n" 
+        f"* **BsmtFinType1** Rating of basement finished area (GLQ: Good Living Quarters; ALQ: Average Living Quarters;  BLQ: Below Average Living Quarters; Rec: Average Rec Room; LwQ: Low Quality; Unf: Unfinshed; None: No Basement)\n" 
+        f"* **BsmtFinSF1** Type 1 finished square feet\n" 
+        f"* **BsmtUnfSF** Unfinished square feet of basement area\n" 
+        f"* **TotalBsmtSF** Total square feet of basement area\n\n" 
         f"**Project Dataset**\n"
-        f"* The dataset represents a **customer base from a Telco company** "
-        f"containing individual customer data on the products and services "
-        f"(like internet type, online security, online backup, tech support), "
-        f"account information (like contract type, payment method, monthly charges) "
-        f"and profile (like gender, partner, dependents).")
-
-    # Link to README file, so the users can have access to full project documentation
+        f"* The dataset is from a public sales record of properties purchased in Ames, Iowa. ** "
+        f"The dataset was public so hiding dataset was not  neccecary and it contains individual measurments and custom grading of properties sold."
+    )
     st.write(
         f"* For additional information, please visit and **read** the "
-        f"[Project README file](https://github.com/Code-Institute-Solutions/churnometer).")
+        f"[Project README file](https://github.com/Code-Institute-Solutions/House-Sales).")
     
 
-    # copied from README file - "Business Requirements" section
     st.success(
         f"The project has 2 business requirements:\n"
-        f"* 1 - The client is interested in understanding the patterns from the customer base "
-        f"so that the client can learn the most relevant variables that are correlated to a "
-        f"churned customer.\n"
-        f"* 2 - The client is interested in determining whether or not a given prospect will churn. "
-        f"If so, the client is interested to know when. In addition, the client is "
-        f"interested in learning from which cluster this prospect will belong in the customer base. "
-        f"Based on that, present potential factors that could maintain and/or bring  "
-        f"the prospect to a non-churnable cluster."
+        f"* 1 - The client is interested in understanding the property market of Ames, Iowa"
+        f"so that the client can place an appropriate for sale price on 4 different inherited properties.\n "
+        f"* 2 - The client is interested in discovering how house attributes correlate with sale prices. Therefore, the client expects data visualizations of the correlated variables against the sale price.\n "
+        f"The client will maximize the sales price for the inherited properties."
         )
 
         
