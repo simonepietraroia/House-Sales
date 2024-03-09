@@ -21,7 +21,7 @@ def page_summary_body():
     )
     st.write(
         f"* For additional information, please visit and **read** the "
-        f"[Project README file](https://github.com/Code-Institute-Solutions/House-Sales).")
+        f"[Project README file](https://github.com/simonepietraroia/House-Sales/blob/main/README.md).")
     
 
     st.success(
