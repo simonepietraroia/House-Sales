@@ -9,7 +9,7 @@ import seaborn as sns
 sns.set_style("whitegrid")
 
 
-def page_churned_customer_study_body():
+def page_sales_study_body():
 
     # load data
     df = load_telco_data()

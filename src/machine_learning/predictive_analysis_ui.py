@@ -1,22 +1,22 @@
 import streamlit as st
 
 
-def predict_churn(X_live, churn_features, churn_pipeline_dc_fe, churn_pipeline_model):
+def predict_sales(X_live, sales_features, sales_pipeline_dc_fe, sales_pipeline_model):
 
     # from live data, subset features related to this pipeline
-    X_live_churn = X_live.filter(churn_features)
+    X_live_sales = X_live.filter(sales_features)
 
     # apply data cleaning / feat engine pipeline to live data
-    X_live_churn_dc_fe = churn_pipeline_dc_fe.transform(X_live_churn)
+    X_live_sales_dc_fe = sales_pipeline_dc_fe.transform(X_live_sales)
 
     # predict
-    churn_prediction = churn_pipeline_model.predict(X_live_churn_dc_fe)
-    churn_prediction_proba = churn_pipeline_model.predict_proba(
-        X_live_churn_dc_fe)
+    sales_prediction = sales_pipeline_model.predict(X_live_sales_dc_fe)
+    sales_prediction_proba = sales_pipeline_model.predict_proba(
+        X_live_sales_dc_fe)
     # st.write(churn_prediction_proba)
 
     # Create a logic to display the results
-    churn_prob = churn_prediction_proba[0, churn_prediction][0]*100
+    sales_prob = sales_prediction_proba[0, sales_prediction][0]*100
     if churn_prediction == 1:
         churn_result = 'will'
     else:
@@ -29,36 +29,6 @@ def predict_churn(X_live, churn_features, churn_pipeline_dc_fe, churn_pipeline_m
     st.write(statement)
 
     return churn_prediction
-
-
-def predict_tenure(X_live, tenure_features, tenure_pipeline, tenure_labels_map):
-
-    # from live data, subset features related to this pipeline
-    X_live_tenure = X_live.filter(tenure_features)
-
-    # predict
-    tenure_prediction = tenure_pipeline.predict(X_live_tenure)
-    tenure_prediction_proba = tenure_pipeline.predict_proba(X_live_tenure)
-    # st.write(tenure_prediction_proba)
-
-    # create a logic to display the results
-    proba = tenure_prediction_proba[0, tenure_prediction][0]*100
-    tenure_levels = tenure_labels_map[tenure_prediction[0]]
-
-    if tenure_prediction != 1:
-        statement = (
-            f"* In addition, there is a {proba.round(2)}% probability the prospect "
-            f"will stay **{tenure_levels} months**. "
-        )
-    else:
-        statement = (
-            f"* The model has predicted the prospect would stay **{tenure_levels} months**, "
-            f"however we acknowledge that the recall and precision levels for {tenure_levels} is not "
-            f"strong. The AI tends to identify potential churners, but for this prospect the AI is not "
-            f"confident enough on how long the prospect would stay."
-        )
-
-    st.write(statement)
 
 
 def predict_cluster(X_live, cluster_features, cluster_pipeline, cluster_profile):

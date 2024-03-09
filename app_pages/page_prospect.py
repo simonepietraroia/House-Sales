@@ -1,10 +1,7 @@
 import streamlit as st
 import pandas as pd
 from src.data_management import load_telco_data, load_pkl_file
-from src.machine_learning.predictive_analysis_ui import (
-    predict_churn,
-    predict_tenure,
-    predict_cluster)
+from src.machine_learning.predictive_analysis_ui import (predict_sales, predict_cluster)
 
 
 def page_prospect_body():
@@ -12,24 +9,13 @@ def page_prospect_body():
     # load predict churn files
     version = 'v1'
     churn_pipe_dc_fe = load_pkl_file(
-        f'outputs/ml_pipeline/predict_churn/{version}/clf_pipeline_data_cleaning_feat_eng.pkl')
+        f'outputs/ml_pipeline/predict_sales/{version}/clf_pipeline_data_cleaning_feat_eng.pkl')
     churn_pipe_model = load_pkl_file(
-        f"outputs/ml_pipeline/predict_churn/{version}/clf_pipeline_model.pkl")
-    churn_features = (pd.read_csv(f"outputs/ml_pipeline/predict_churn/{version}/X_train.csv")
+        f"outputs/ml_pipeline/predict_sales/{version}/clf_pipeline_model.pkl")
+    churn_features = (pd.read_csv(f"outputs/ml_pipeline/predict_sales/{version}/X_train.csv")
                       .columns
                       .to_list()
                       )
-
-    # load predict tenure files
-    version = 'v1'
-    tenure_pipe = load_pkl_file(
-        f"outputs/ml_pipeline/predict_tenure/{version}/clf_pipeline.pkl")
-    tenure_labels_map = load_pkl_file(
-        f"outputs/ml_pipeline/predict_tenure/{version}/label_map.pkl")
-    tenure_features = (pd.read_csv(f"outputs/ml_pipeline/predict_tenure/{version}/X_train.csv")
-                       .columns
-                       .to_list()
-                       )
 
     # load cluster analysis files
     version = 'v1'
@@ -58,7 +44,7 @@ def page_prospect_body():
 
     # predict on live data
     if st.button("Run Predictive Analysis"):
-        churn_prediction = predict_churn(
+        sales_prediction = predict_churn(
             X_live, churn_features, churn_pipe_dc_fe, churn_pipe_model)
 
         if churn_prediction == 1:

@@ -23,8 +23,8 @@ def page_cluster_body():
                         )
 
     # dataframe for cluster_distribution_per_variable()
-    df_churn_vs_clusters = load_telco_data().filter(['Churn'], axis=1)
-    df_churn_vs_clusters['Clusters'] = cluster_pipe['model'].labels_
+    df_sales_vs_clusters = load_telco_data().filter(['SalePrice'], axis=1)
+    df_sales_vs_clusters['Clusters'] = cluster_pipe['model'].labels_
 
     st.write("### ML Pipeline: Cluster Analysis")
     # display pipeline training summary conclusions
@@ -44,7 +44,7 @@ def page_cluster_body():
     st.write("#### Clusters Silhouette Plot")
     st.image(cluster_silhouette)
 
-    cluster_distribution_per_variable(df=df_churn_vs_clusters, target='Churn')
+    cluster_distribution_per_variable(df=df_sales_vs_clusters, target='SalePrice')
 
     st.write("#### Most important features to define a cluster")
     st.image(features_to_cluster)
