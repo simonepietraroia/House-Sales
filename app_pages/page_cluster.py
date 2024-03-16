@@ -31,7 +31,7 @@ def page_cluster_body():
     st.info(
         f"* We refitted the cluster pipeline using fewer variables, and it delivered equivalent "
         f"performance to the pipeline fitted using all variables.\n"
-        f"* The pipeline average silhouette score is 0.68"
+        f"* The pipeline average silhouette score is 0.18"
     )
     st.write("---")
 
@@ -52,25 +52,21 @@ def page_cluster_body():
     # text based on "07 - Modeling and Evaluation - Cluster Sklearn" notebook conclusions
     st.write("#### Cluster Profile")
     statement = (
-        f"* Historically, **users in Clusters 0 do not tend to Churn**, "
-        f"whereas in **Cluster 1 a third of users churned**, "
-        f"and in **Cluster 2 a quarter of users churned**. \n"
-        f"* From the Predict Churn study, we noticed that the ContractType and InternetService "
-        f"are the predictor variables to determine, if a person will churn or not.\n"
-        f"* **One potential action** when you detect that a given prospect is expected to churn and "
-        f"will belong to cluster 1 or 2 is to mainly avoid month to month contract type, "
-        f"like we learned in the churned customer study. \n"
-        f"* The salesperson would have then to consider the current product and services "
-        f"plan availability and encourage the prospect to move to another contract."
+        f"* Historically, **In Cluster 0 properties with low ground living area typically sell for less**, "
+        f"and in **Cluster 2 properties with a rating of 'GLQ' for basement finish type typically sell for more **. \n"
+        f"* From the Predict Sales study, we noticed that the TotalBsmtSF and YearBuilt "
+        f"are the main predictor variables to typically raise the value of a property.\n"
+        f"* The real estate agent should consider assigning higher value to the properties "
+        f" that have a larger square footage of their basements and are newer builds."
     )
     st.info(statement)
 
     # text based on "07 - Modeling and Evaluation - Cluster Sklearn" notebook conclusions
     statement = (
         f"* The cluster profile interpretation allowed us to label the cluster in the following fashion:\n"
-        f"* Cluster 0 has users without internet, who are low spenders with a phone.\n"
-        f"* Cluster 1 has users with Internet, who are high spenders with a phone.\n"
-        f"* Cluster 2 has users with Internet, who are mid spenders without a phone."
+        f"* Cluster 0 are properties with low basement square footage and are the oldest in the dataset .\n"
+        f"* Cluster 1 are properties with mid-to-low basement square footage and are middle of the dataset Year built.\n"
+        f"* Cluster 2 are properties with large basement square footage and are the built most recently."
     )
     st.success(statement)
 

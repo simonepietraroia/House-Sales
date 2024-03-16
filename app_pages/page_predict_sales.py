@@ -2,8 +2,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 from src.data_management import load_telco_data, load_pkl_file
-from src.machine_learning.evaluate_clf import clf_performance
-
+from src.machine_learning.evaluate_regressor import regression_performance, regressor_performance
 
 def page_predict_sale_body():
 
@@ -27,9 +26,9 @@ def page_predict_sale_body():
     st.write("### ML Pipeline: Predict Sales Price")
     # display pipeline training summary conclusions
     st.info(
-        f"* The pipeline was tuned aiming at least 0.80 Recall on 'Yes Churn' class, "
-        f"since we are interested in this project in detecting a potential churner. \n"
-        f"* The pipeline performance on train and test set is 0.90 and 0.85, respectively."
+        f"* The pipeline was tuned aiming for at least an R2 score of at least 0.75 on the train set as well as on the test set, "
+        f"since we are interested in this project in evaluating property value. \n"
+        f"* The pipeline performance on train and test set is 1.00 and 0.49, respectively."
     )
 
     # show pipelines
@@ -49,12 +48,12 @@ def page_predict_sale_body():
     st.image(sales_feat_importance)
 
     # We don't need to apply dc_fe pipeline, since X_train and X_test
-    # were already transformed in the jupyter notebook (Predict Customer Churn.ipynb)
+    # were already transformed in the jupyter notebook 
 
     # evaluate performance on train and test set
     st.write("---")
     st.write("### Pipeline Performance")
-    clf_performance(X_train=X_train, y_train=y_train,
-                    X_test=X_test, y_test=y_test,
-                    pipeline=sales_pipe_model,
-                    label_map=["SalePrice"])
+    regressor_performance(X_train=X_train, y_train=y_train,
+                      X_test=X_test, y_test=y_test,
+                      regressor=sales_pipe_model,
+                      label="SalePrice")

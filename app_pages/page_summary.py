@@ -25,11 +25,12 @@ def page_summary_body():
     
 
     st.success(
-        f"The project has 2 business requirements:\n"
+        f"The project has 3 business requirements:\n"
         f"* 1 - The client is interested in understanding the property market of Ames, Iowa"
         f"so that the client can place an appropriate for sale price on 4 different inherited properties.\n "
         f"* 2 - The client is interested in discovering how house attributes correlate with sale prices. Therefore, the client expects data visualizations of the correlated variables against the sale price.\n "
         f"The client will maximize the sales price for the inherited properties."
+        f"We agreed with the client an R2 score of at least 0.75 on the train set as well as on the test set."
         )
 
         
