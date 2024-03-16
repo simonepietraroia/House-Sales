@@ -8,11 +8,11 @@ def page_prospect_body():
 
     # load predict churn files
     version = 'v1'
-    churn_pipe_dc_fe = load_pkl_file(
+    sales_pipe_dc_fe = load_pkl_file(
         f'outputs/ml_pipeline/predict_sales/{version}/clf_pipeline_data_cleaning_feat_eng.pkl')
-    churn_pipe_model = load_pkl_file(
+    sales_pipe_model = load_pkl_file(
         f"outputs/ml_pipeline/predict_sales/{version}/clf_pipeline_model.pkl")
-    churn_features = (pd.read_csv(f"outputs/ml_pipeline/predict_sales/{version}/X_train.csv")
+    sales_features = (pd.read_csv(f"outputs/ml_pipeline/predict_sales/{version}/X_train.csv")
                       .columns
                       .to_list()
                       )
@@ -44,11 +44,11 @@ def page_prospect_body():
 
     # predict on live data
     if st.button("Run Predictive Analysis"):
-        sales_prediction = predict_churn(
-            X_live, churn_features, churn_pipe_dc_fe, churn_pipe_model)
+        sales_prediction = predict_sales(
+            X_live, sales_features, sales_pipe_dc_fe, sales_pipe_model)
 
         if churn_prediction == 1:
-            predict_tenure(X_live, tenure_features,
+            predict_sales(X_live, sales_features,
                            tenure_pipe, tenure_labels_map)
 
         predict_cluster(X_live, cluster_features,
