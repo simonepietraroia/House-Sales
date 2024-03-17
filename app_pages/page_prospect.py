@@ -1,12 +1,11 @@
 import streamlit as st
 import pandas as pd
 from src.data_management import load_telco_data, load_pkl_file
-from src.machine_learning.predictive_analysis_ui import (predict_sales, predict_cluster)
-
+from src.machine_learning.predictive_analysis_ui import predict_sale_price, predict_cluster
 
 def page_prospect_body():
 
-    # load predict churn files
+    # load predict sales files
     version = 'v1'
     sales_pipe_dc_fe = load_pkl_file(
         f'outputs/ml_pipeline/predict_sales/{version}/clf_pipeline_data_cleaning_feat_eng.pkl')
@@ -30,39 +29,32 @@ def page_prospect_body():
 
     st.write("### Prospect Churnometer Interface")
     st.info(
-        f"* The client is interested in determining whether or not a given prospect will churn. "
-        f"If so, the client is interested to know when. In addition, the client is "
-        f"interested in learning from which cluster this prospect will belong in the customer base. "
-        f"Based on that, present potential factors that could maintain and/or bring  "
-        f"the prospect to a non-churnable cluster."
+        f"* The client is interested in knowing an aproximate property value for the 4 inherited properties.\n"
+        f"* The client is also interested in having the data be shown visually to see which properties belong to which cluster.\n"
+        f"* Based on that, present potential factors that affect property value."
     )
     st.write("---")
 
     # Generate Live Data
-    # check_variables_for_UI(tenure_features, churn_features, cluster_features)
     X_live = DrawInputsWidgets()
 
     # predict on live data
     if st.button("Run Predictive Analysis"):
-        sales_prediction = predict_sales(
+        sales_prediction = predict_sale_price(
             X_live, sales_features, sales_pipe_dc_fe, sales_pipe_model)
 
-        if churn_prediction == 1:
-            predict_sales(X_live, sales_features,
-                           tenure_pipe, tenure_labels_map)
+        st.write(f"Predicted Sale Price: ${sales_prediction:.2f}")
 
-        predict_cluster(X_live, cluster_features,
-                        cluster_pipe, cluster_profile)
+        # If you have a cluster prediction function, you can call it here
+        # predict_cluster(X_live, cluster_features, cluster_pipe, cluster_profile)
 
 
-def check_variables_for_UI(tenure_features, churn_features, cluster_features):
+def check_variables_for_UI(sales_features, cluster_features):
     import itertools
 
-    # The widgets inputs are the features used in all pipelines (tenure, churn, cluster)
-    # We combine them only with unique values
     combined_features = set(
         list(
-            itertools.chain(tenure_features, churn_features, cluster_features)
+            itertools.chain(sales_features, cluster_features)
         )
     )
     st.write(
@@ -75,67 +67,138 @@ def DrawInputsWidgets():
     df = load_telco_data()
     percentageMin, percentageMax = 0.4, 2.0
 
-# we create input widgets only for 6 features
-    col1, col2, col3, col4 = st.beta_columns(4)
-    col5, col6, col7, col8 = st.beta_columns(4)
+    col1, col2, col3, col4, col5, col6, col7, col8, col9, col10 = st.beta_columns(10)
 
-    # We are using these features to feed the ML pipeline - values copied from check_variables_for_UI() result
-
-    # create an empty DataFrame, which will be the live data
     X_live = pd.DataFrame([], index=[0])
 
-    # from here on we draw the widget based on the variable type (numerical or categorical)
-    # and set initial values
     with col1:
-        feature = "Contract"
-        st_widget = st.selectbox(
+        feature = "1stFlrSF"
+        custom_number = st.text_area(
             label=feature,
-            options=df[feature].unique()
+            value=str(df[feature].median()),  # Convert median value to string
         )
-    X_live[feature] = st_widget
+    # Convert custom_number to float if it's not empty
+    custom_number = float(custom_number) if custom_number.strip() != '' else None
+    X_live[feature] = custom_number
+
+    # Apply HTML/CSS to adjust the width of the input box
+    st.write(f'<style>div.row-widget.stTextArea>div {{"width": "400px"}}</style>', unsafe_allow_html=True)
+
 
     with col2:
-        feature = "InternetService"
-        st_widget = st.selectbox(
+        feature = "GarageArea"
+        custom_number = st.text_area(
             label=feature,
-            options=df[feature].unique()
+            value=str(df[feature].median()),  # Convert median value to string
         )
-    X_live[feature] = st_widget
+    # Convert custom_number to float if it's not empty
+    custom_number = float(custom_number) if custom_number.strip() != '' else None
+    X_live[feature] = custom_number
+
+    # Apply HTML/CSS to adjust the width of the input box
+    st.write(f'<style>div.row-widget.stTextArea>div {{"width": "400px"}}</style>', unsafe_allow_html=True)
 
     with col3:
-        feature = "MonthlyCharges"
-        st_widget = st.number_input(
+        feature = "LotArea"
+        custom_number = st.text_area(
             label=feature,
-            min_value=df[feature].min()*percentageMin,
-            max_value=df[feature].max()*percentageMax,
-            value=df[feature].median()
+            value=str(df[feature].median()),  # Convert median value to string
         )
-    X_live[feature] = st_widget
+    # Convert custom_number to float if it's not empty
+    custom_number = float(custom_number) if custom_number.strip() != '' else None
+    X_live[feature] = custom_number
+
+    # Apply HTML/CSS to adjust the width of the input box
+    st.write(f'<style>div.row-widget.stTextArea>div {{"width": "400px"}}</style>', unsafe_allow_html=True)
+
 
     with col4:
-        feature = "PaymentMethod"
-        st_widget = st.selectbox(
+        feature = "BsmtUnfSF"
+        custom_number = st.text_area(
             label=feature,
-            options=df[feature].unique()
+            value=str(df[feature].median()),  # Convert median value to string
         )
-    X_live[feature] = st_widget
+    # Convert custom_number to float if it's not empty
+    custom_number = float(custom_number) if custom_number.strip() != '' else None
+    X_live[feature] = custom_number
+
+    # Apply HTML/CSS to adjust the width of the input box
+    st.write(f'<style>div.row-widget.stTextArea>div {{"width": "400px"}}</style>', unsafe_allow_html=True)
 
     with col5:
-        feature = "OnlineBackup"
-        st_widget = st.selectbox(
+        feature = "GrLivArea"
+        custom_number = st.text_area(
             label=feature,
-            options=df[feature].unique()
+            value=str(df[feature].median()),  # Convert median value to string
         )
-    X_live[feature] = st_widget
+    # Convert custom_number to float if it's not empty
+    custom_number = float(custom_number) if custom_number.strip() != '' else None
+    X_live[feature] = custom_number
+
+    # Apply HTML/CSS to adjust the width of the input box
+    st.write(f'<style>div.row-widget.stTextArea>div {{"width": "400px"}}</style>', unsafe_allow_html=True)
 
     with col6:
-        feature = "PhoneService"
-        st_widget = st.selectbox(
+        feature = "LotFrontage"
+        custom_number = st.text_area(
             label=feature,
-            options=df[feature].unique()
+            value=str(df[feature].median()),  # Convert median value to string
         )
-    X_live[feature] = st_widget
+    # Convert custom_number to float if it's not empty
+    custom_number = float(custom_number) if custom_number.strip() != '' else None
+    X_live[feature] = custom_number
 
-    # st.write(X_live)
+    # Apply HTML/CSS to adjust the width of the input box
+    st.write(f'<style>div.row-widget.stTextArea>div {{"width": "400px"}}</style>', unsafe_allow_html=True)
 
+    with col7:
+        feature = "BsmtFinSF1"
+        custom_number = st.text_area(
+            label=feature,
+            value=str(df[feature].median()),  # Convert median value to string
+        )
+    # Convert custom_number to float if it's not empty
+    custom_number = float(custom_number) if custom_number.strip() != '' else None
+    X_live[feature] = custom_number
+
+    # Apply HTML/CSS to adjust the width of the input box
+    st.write(f'<style>div.row-widget.stTextArea>div {{"width": "400px"}}</style>', unsafe_allow_html=True)
+
+    with col8:
+        feature = "TotalBsmtSF"
+        custom_number = st.text_area(
+            label=feature,
+            value=str(df[feature].median()),  # Convert median value to string
+        )
+    # Convert custom_number to float if it's not empty
+    custom_number = float(custom_number) if custom_number.strip() != '' else None
+    X_live[feature] = custom_number
+
+    # Apply HTML/CSS to adjust the width of the input box
+    st.write(f'<style>div.row-widget.stTextArea>div {{"width": "400px"}}</style>', unsafe_allow_html=True)
+
+    with col9:
+        feature = "OpenPorchSF"
+        custom_number = st.text_area(
+            label=feature,
+            value=str(df[feature].median()),  # Convert median value to string
+        )
+    # Convert custom_number to float if it's not empty
+    custom_number = float(custom_number) if custom_number.strip() != '' else None
+    X_live[feature] = custom_number
+
+    # Apply HTML/CSS to adjust the width of the input box
+    st.write(f'<style>div.row-widget.stTextArea>div {{"width": "400px"}}</style>', unsafe_allow_html=True)
+    with col10:
+        feature = "2ndFlrSF"
+        custom_number = st.text_area(
+            label=feature,
+            value=str(df[feature].median()),  # Convert median value to string
+        )
+    # Convert custom_number to float if it's not empty
+    custom_number = float(custom_number) if custom_number.strip() != '' else None
+    X_live[feature] = custom_number
+
+    # Apply HTML/CSS to adjust the width of the input box
+    st.write(f'<style>div.row-widget.stTextArea>div {{"width": "400px"}}</style>', unsafe_allow_html=True)
     return X_live

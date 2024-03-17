@@ -28,7 +28,9 @@ def page_predict_sale_body():
     st.info(
         f"* The pipeline was tuned aiming for at least an R2 score of at least 0.75 on the train set as well as on the test set, "
         f"since we are interested in this project in evaluating property value. \n"
-        f"* The pipeline performance on train and test set is 1.00 and 0.49, respectively."
+        f"* The pipeline performance on train and test set is 1.00 and 0.49, respectively. \n"
+        f"* The pipline preformance is most likely low due to the class oversampling method used."
+        f" Additionally, the pipline preformance might have been affected by the choice of hyperparameter."
     )
 
     # show pipelines
