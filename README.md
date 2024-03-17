@@ -64,21 +64,23 @@ Although your friend has an excellent understanding of property prices in her ow
 
 ## The rationale to map the business requirements to the Data Visualisations and ML tasks
 * The client wishes to discover how house attributes correlate with sale prices. Therefore, the client expects data visualizations of the correlated variables against the sale price.
-* A regressor model was used in this case to
-
-
-## ML Business Case
-* In the previous bullet, you potentially visualised an ML task to answer a business requirement. You should frame the business case using the method we covered in the course.
+* A regressor model was used in this case to be able to show whether changes observed in the dependent variable are associated with changes in one or more of the explanatory variables.
+* The dashboard will contain a graph of the most impactful variable and will also contain a cluster analysis which will be devided in 3 clusters.
+* The dashboard will also contain a page to predict sales price by inputing the 9 most impactful features which allows the client to maximize sales price for the inherited properties.
+* We agreed with the client an R2 score of at least 0.75 on the train set as well as on the test set.
 
 
 ## Dashboard Design
-* List all dashboard pages and their content, either blocks of information or widgets, like buttons, checkboxes, images, or any other items that your dashboard library supports.
-* Eventually, during the project development, you may revisit your dashboard plan to update a given feature (for example, at the beginning of the project you were confident you would use a given plot to display an insight but eventually you needed to use another plot type)
+* The first page in the dashboard will be a quick summary which contains project terms and business requirements
+* The second page will contain allow the client to input data from the 9 most impactful vairables from their inherited houses and the dashboard will give a predicted sales price for the proposed property.
+* The third page contains the hypothesis of which feature is most impactful to sales price.
+* The fourth page contains an evaluation of pipline tested with the test and train set using R2 score.
+* The firth page contains a multiple graphic visualiations of the cluster analysis that as well as a range of of each cluster of each impactful feature 
 
 
 
 ## Unfixed Bugs
-* You will need to mention unfixed bugs and why they were not fixed. This section should include shortcomings of the frameworks or technologies used. Although time can be a big variable to consider, paucity of time and difficulty understanding implementation is not valid reason to leave bugs unfixed.
+* 
 
 ## Deployment
 ### Heroku
@@ -95,13 +97,26 @@ Although your friend has an excellent understanding of property prices in her ow
 6. If the slug size is too large then add large files not required for the app to the .slugignore file.
 
 ## Main Data Analysis and Machine Learning Libraries
-* Here you should list the libraries you used in the project and provide example(s) of how you used these libraries.
-
+* Pandas Profiling
+* scikit-learn
+* Kaggle
+* ydata_profiling
+* matplotlib.pyplot
+* Seaborn
+* ppScore
+* Feature-engine
+* ScipyStats
+* Numpy
+* Xgboost
+* Joblib
+* Yellowbrick
+* Plotly
 
 ## Credits 
 
-* In this section, you need to reference where you got your content, media and extra help from. It is common practice to use code from other repositories and tutorials, however, it is important to be very specific about these sources to avoid plagiarism. 
-* You can break the credits section up into Content and Media, depending on what you have included in your project. 
+* A lot of inspiration is taken from the Code Institute's Churnometer walkthrough project
+* The HyperOptimizationSearch function was directly taken from the Churnometer project 
+* The slack predictive analysis channel was useful in helping trouble shoot some technical issues with the template
 
 ### Content 
 
@@ -109,13 +124,6 @@ Although your friend has an excellent understanding of property prices in her ow
 - Instructions on how to implement form validation on the Sign-Up page was taken from [Specific YouTube Tutorial](https://www.youtube.com/)
 - The icons in the footer were taken from [Font Awesome](https://fontawesome.com/)
 
-### Media
-
-- The photos used on the home and sign-up page are from This Open Source site
-- The images used for the gallery page were taken from this other open-source site
-
-
-
 ## Acknowledgements (optional)
-* In case you would like to thank the people that provided support through this project.
+* The slack predictive analysis channel was useful in helping trouble shoot some technical issues with the template
 
