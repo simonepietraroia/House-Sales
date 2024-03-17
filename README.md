@@ -58,7 +58,7 @@ Although your friend has an excellent understanding of property prices in her ow
 
 
 ## Hypothesis and how to validate?
-* We predict that 1stFlrSF will be the feature that most closely correlates to the properties' SalePrice
+* We predict that OverallQual will be the feature that most closely correlates to the properties' SalePrice
 * All the features will be compared to the target (SalePrice) and the most correlated features will be shown
 
 
@@ -71,22 +71,47 @@ Although your friend has an excellent understanding of property prices in her ow
 
 
 ## Dashboard Design
-* The first page in the dashboard will be a quick summary which contains project terms and business requirements
-* The second page will contain allow the client to input data from the 9 most impactful vairables from their inherited houses and the dashboard will give a predicted sales price for the proposed property.
-* The third page contains the hypothesis of which feature is most impactful to sales price.
-* The fourth page contains an evaluation of pipline tested with the test and train set using R2 score.
-* The firth page contains a multiple graphic visualiations of the cluster analysis that as well as a range of of each cluster of each impactful feature 
+### Page 1: Quick project summary
+* Quick project summary
+	* Project Terms & Jargon
+	* Describe Project Dataset
+	* State Business Requirements
 
+### Page 3: Sales Price Predict
+* State business requirement 2
+* Set of widgets inputs, Each set of inputs is related to a given ML task to predict sales value.
+* "Run predictive analysis" button that serves the prospect data to our ML pipelines, and predicts an estimated sales price for the property value 
+
+### Page 4: Project Hypothesis and Validation
+* Before the analysis, we knew we wanted this page to describe each project hypothesis, the conclusions, and how we validated each. After the data analysis, we can report that:
+* - We suspect Overall Qual has the most impact of property value
+	* Correct. The correlation study at Sales Record Study supports that.
+    
+### Page 5: Predict Value
+* Considerations and conclusions after the pipeline is trained
+* Present ML pipeline steps
+* Feature importance
+* Pipeline performance
+
+### Page 6: Cluster Analysis
+* Considerations and conclusions after the pipeline is trained
+* Present ML pipeline steps
+* Silhouette plot
+* Clusters distribution across SalePrice levels
+* Relative Percentage (%) of SalePrice in each cluster
+* The most important features to define a cluster
+* Cluster Profile
 
 
 ## Unfixed Bugs
-* 
+* Sales Price predict page on dashboard has input boxes that don't fit the input numbers more than 2 digets
+
 
 ## Deployment
 ### Heroku
 
-* The App live link is: https://predict-sales-app-98929437a4b0.herokuapp.com/ 
-* Set the runtime.txt Python version to a [Heroku-20](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack currently supported version.
+* The App live link is: https://predict-sales-app-98929437a4b0.herokuapp.com// 
+* Set the runtime.txt Python version to a [ python-3.9.18 ] stack currently supported version.
 * The project was deployed to Heroku using the following steps.
 
 1. Log in to Heroku and create an App
