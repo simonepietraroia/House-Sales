@@ -3,7 +3,7 @@ import pandas as pd
 from src.data_management import load_telco_data, load_pkl_file
 from src.machine_learning.predictive_analysis_ui import predict_sale_price, predict_cluster
 
-def page_prospect_body():
+def page_predict_body():
 
     # load predict sales files
     version = 'v1'
